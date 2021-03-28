@@ -1,0 +1,13 @@
+POST http://localhost:9999/api/users
+Content-Type: application/json
+
+{
+  "age": 10,
+  "name": "Bonifaciy"
+}
+
+###
+GET http://localhost:9999/api/get
+Accept: application/json
+
+###
