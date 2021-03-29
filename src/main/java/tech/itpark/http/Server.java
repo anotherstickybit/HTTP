@@ -217,7 +217,7 @@ public class Server {
                     continue;
                 }
                 // []byte
-                if (bodyConverter.canRead(request, param.getType())) {
+                if (bodyConverter.canRead(request.getHeaders().get("Content-Type"), param.getType())) {
                     args.add(bodyConverter.convert(request, param.getType()));
                     continue;
                 }
@@ -257,11 +257,8 @@ public class Server {
             writeResponseStream(responseStream, stringResponse, "text/plain");
             return;
         }
-        if (bodyConverter.canWrite(responseType)) {
-            String convert = bodyConverter.convert(response, responseType);
-            writeResponseStream(responseStream, convert, "application/json");
-            return;
-        }
+        String convert = bodyConverter.convert(response, responseType);
+        writeResponseStream(responseStream, convert, "application/json");
     }
 
     private void writeResponseStream(OutputStream responseStream) {
